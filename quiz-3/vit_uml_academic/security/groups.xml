@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+		<record model="ir.module.category" id="module_category_addon_academic_by_uml">
+			<field name="name">Addon Academic by UML</field>
+			<field name="description">Addon Academic by UML Groups</field>
+			<field name="sequence">10</field>
+		</record>
+		<record id="group_addon_academic_by_uml_user" model="res.groups">
+			<field name="name">User</field>
+			<field name="category_id" ref="module_category_addon_academic_by_uml"/>
+		</record>
+		<record id="group_addon_academic_by_uml_manager" model="res.groups">
+			<field name="name">Manager</field>
+			<field name="category_id" ref="module_category_addon_academic_by_uml"/>
+		</record>
+	</data>
+</odoo>

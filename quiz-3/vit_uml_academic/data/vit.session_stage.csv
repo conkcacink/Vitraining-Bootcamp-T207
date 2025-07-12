@@ -1,0 +1,5 @@
+id,name,sequence,draft,done,open,fold,allow_confirm,allow_cancel,execute_enter,confirmation
+session_stage_1,Draft,1,true,false,false,false,true,false,,
+session_stage_2,Open,2,false,false,true,false,true,true,,
+session_stage_3,Verifikasi,3,false,false,true,false,true,true,,
+session_stage_4,Done,4,false,true,false,false,false,false,,

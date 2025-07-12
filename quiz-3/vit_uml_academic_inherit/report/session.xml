@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <template id="vit_session_report_document2" inherit_id="vit_uml_academic.vit_session_report_document">
+            <xpath expr="//div[@class='row mt32 mb32']" position="replace">
+                <div class="col-auto mw-100 mb-3">
+                    <strong>Start Date</strong>
+                    <p class="m-0" t-field="doc.start_date" />
+                </div>
+                <div class="col-auto mw-100 mb-3">
+                    <strong>Duration</strong>
+                    <p class="m-0" t-field="doc.duration" />
+                </div>
+                <div class="col-auto mw-100 mb-3">
+                    <strong>Seats</strong>
+                    <p class="m-0" t-field="doc.seats" />
+                </div>
+                <div class="col-auto mw-100 mb-3">
+                    <strong>Instructor</strong>
+                    <p class="m-0" t-field="doc.instructor_id" />
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

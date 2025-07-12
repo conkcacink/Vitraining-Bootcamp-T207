@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- form view -->
+        <record id="view_vit_add_attendee_wizard_form" model="ir.ui.view">
+            <field name="name">vit_add_attendee_wizard_form</field>
+            <field name="model">vit.add_attendee_wizard</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Add Attendee Wizard">
+                    <group>
+                        <group> <!-- left -->
+                        </group>
+                        <group> <!-- right -->
+                            <field name="session_id"  />
+                            <field name="partner_ids"  />
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Add Attendees" type="object" name="action_add_attendees"  class="oe_highlight" icon="fa-check-circle" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" icon="fa-times-circle"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
