@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'vit_hotel'), ('name', '=', 'sequence_maintenance')]"/>
+            </function>
+            <value eval="{'noupdate': False}" /> 
+        </function>
+        <record id="vit_hotel.sequence_maintenance" model="ir.sequence">
+            <field name="name">sequence_maintenance</field>
+            <field name="code">vit.maintenance</field>
+            <field name="prefix">MAIXX/%(year)s/%(month)s/</field>
+            <field name="padding">3</field>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'vit_hotel'), ('name', '=', 'sequence_maintenance')]"/>
+            </function>
+            <value eval="{'noupdate': True}" />
+        </function>
+    </data>
+</odoo>
