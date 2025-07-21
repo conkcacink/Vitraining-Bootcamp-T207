@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_maintenance_tree" model="ir.ui.view">
+            <field name="name">vit_maintenance_tree</field>
+            <field name="model">vit.maintenance</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Maintenance">
+                    <field name="name" /> <!-- 100-->
+                    <field name="room_id" /> <!-- 100-->
+                    <field name="start_date" /> <!-- 101-->
+                    <field name="end_date" /> <!-- 102-->
+                    <field name="state" /> <!-- 103-->
+                </list>
+            </field>
+        </record>
+        <!-- pivot view -->
+        <record id="view_vit_maintenance_pivot" model="ir.ui.view">
+            <field name="name">vit_maintenance_tree</field>
+            <field name="model">vit.maintenance</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Maintenance">
+                    <field name="room_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_maintenance_form" model="ir.ui.view">
+            <field name="name">vit_maintenance_form</field>
+            <field name="model">vit.maintenance</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Maintenance">
+                    <header>
+                        <button string="Confirm" type="object" name="action_confirm" class="oe_highlight" icon="fa-check-circle" />
+                        <button string="Reset to Draft" type="object" name="action_cancel"  icon="fa-times-circle" />
+                        <field name="state" widget="statusbar" />
+                        <button string="Reload" type="object" name="action_reload_view" icon="fa-refresh"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Maintenance Name"/>
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group> <!-- left -->
+                                <field name="start_date"  readonly="state!='draft'"/>
+                                <field name="end_date"  readonly="state!='draft'"/>
+                            </group>
+                            <group> <!-- right -->
+                                <field name="room_id"  readonly="state!='draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            </group>
+                            <div class="clearfix"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_maintenance_search" model="ir.ui.view">
+            <field name="name">vit_maintenance</field>
+            <field name="model">vit.maintenance</field>
+            <field name="arch" type="xml">
+                <search string="Maintenance">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Start Date" name="filter_by_start_date" domain="[('start_date','=','')]" />
+                    <filter string="End Date" name="filter_by_end_date" domain="[('end_date','=','')]" />
+                    <filter string="State" name="filter_by_state" domain="[('state','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="start_date" select="True"/>
+                    <field name="end_date" select="True"/>
+                    <field name="state" select="True"/>
+                    <field name="room_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Room" domain="[]" name="group_by_room_id" context="{'group_by':'room_id'}"/>
+                        <filter string="State" domain="[]" name="group_by_state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image, image_512, image_1920, or image_small in the model -->
+        <record id="view_vit_maintenance_kanban" model="ir.ui.view" >
+            <field name="name">vit_maintenance</field>
+            <field name="model">vit.maintenance</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            <span class="text-muted">End Date</span> <field name="end_date"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <record id="view_vit_maintenance_cal" model="ir.ui.view">
+            <field name="name">vit_maintenance_cal</field>
+            <field name="model">vit.maintenance</field>
+            <field name="arch" type="xml">
+                <calendar string="Maintenance" date_start="end_date">
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+        <!-- graph -->
+        <record id="view_vit_maintenance_graph" model="ir.ui.view">
+            <field name="name">vit_maintenance</field>
+            <field name="model">vit.maintenance</field>
+            <field name="arch" type="xml">
+                <graph string="Maintenance" type="bar">
+                    <field name="room_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_maintenance" model="ir.actions.act_window">
+            <field name="name">Maintenance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.maintenance</field>
+            <field name="view_mode">list,form,kanban,pivot,calendar,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Maintenance
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_maintenance" name="Maintenance" parent="vit_hotel_menu_2" action="action_maintenance" sequence="40"/>
+    </data>
+</odoo>

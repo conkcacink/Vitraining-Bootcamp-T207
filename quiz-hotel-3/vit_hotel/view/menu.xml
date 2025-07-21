@@ -1,0 +1,12 @@
+<odoo>
+	<data>
+		<menuitem id="vit_hotel_top_menu" name="Hotel Management" sequence="20" web_icon="vit_hotel,static/description/icon.png" />
+		<menuitem id="vit_hotel_menu_1" name="Front Office" sequence="1" parent="vit_hotel_top_menu" />
+		<menuitem id="vit_hotel_menu_2" name="Back Office" sequence="2" parent="vit_hotel_top_menu" />
+		<menuitem id="vit_hotel_menu_3" name="Inventory Management" sequence="3" parent="vit_hotel_top_menu" />
+		<menuitem id="vit_hotel_menu_4" name="Accounting &amp; Finance" sequence="4" parent="vit_hotel_top_menu" />
+		<menuitem id="vit_hotel_menu_5" name="Reporting &amp; Analysis" sequence="5" parent="vit_hotel_top_menu" />
+		<menuitem id="vit_hotel_sub_menu" name="Operations" sequence="40" parent="vit_hotel_top_menu" />
+		<menuitem id="vit_hotel_config_menu" name="Configurations" sequence="1000" parent="vit_hotel_top_menu" />
+	</data>
+</odoo>
