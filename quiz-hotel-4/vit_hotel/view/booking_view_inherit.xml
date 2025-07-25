@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_sale_order_form_inherit_booking" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.booking</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Insert after an existing notebook tab -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Booking" name="booking_page">
+                    <group>
+                      <group>
+                          <field name="date_check_in"/>
+                          <field name="date_check_out"/>
+                          <field name="is_booking"/>
+                          <field name="deposit"/>
+                      </group>
+                      <group>                        
+                      </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_sale_order_form_inherit_booking2" model="ir.ui.view">
+      <field name="name">sale.order.form.inherit.booking</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        
+        <!-- Insert new buttons into the header -->
+        <!-- attrs="{'invisible': [('state', '!=', 'sale')]}" -->
+        <xpath expr="//header" position="inside">
+          <button name="action_check_in"
+                  type="object"
+                  string="Check In"
+                  class="btn-secondary"
+                  />
+          <button name="action_check_out"
+                  type="object"
+                  string="Check Out"
+                  class="btn-secondary"
+                  />
+          <button name="action_record_deposit"
+                  type="object"
+                  string="Record Deposit"
+                  class="btn-secondary"
+                  />
+          <button name="action_return_deposit"
+                  type="object"
+                  string="Return Deposit"
+                  class="btn-secondary"
+                  />
+        </xpath>
+      </field>
+    </record>
+</odoo>

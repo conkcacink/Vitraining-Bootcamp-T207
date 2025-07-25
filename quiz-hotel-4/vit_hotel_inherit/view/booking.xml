@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- search -->
+        <!--record id="view_booking_search" model="ir.ui.view">
+            <field name="name">booking</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref=""/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- action window -->
+        <record id="vit_hotel.action_booking" model="ir.actions.act_window">
+            <field name="name">Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{"default_is_booking":1}</field>
+            <field name="domain">[("is_booking","=",True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Booking
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <record id="view_booking_form" model="ir.ui.view">
+            <field name="name">booking_form</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="before">
+                    <field name="room_id" domain="[('is_available','=',True)]" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_booking_form2" model="ir.ui.view">
+            <field name="name">booking_form</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="vit_hotel.view_sale_order_form_inherit_booking" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='booking_page']/group/group[2]" position="inside">
+                    <field name="deposit_journal_id"/>
+                    <field name="return_deposit_journal_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <menuitem active="1" id="vit_hotel.menu_booking" name="Booking" parent="vit_hotel.vit_hotel_config_menu" action="vit_hotel.action_booking" sequence="60"/> -->
+    </data>
+</odoo>

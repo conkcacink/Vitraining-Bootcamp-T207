@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_user_vit_room,access_user_vit_room,model_vit_room,vit_hotel.group_hotel_management_user,1,0,0,0
+access_manager_vit_room,access_manager_vit_room,model_vit_room,vit_hotel.group_hotel_management_manager,1,1,1,1
+access_admin_vit_room,access_admin_vit_room,model_vit_room,base.group_system,1,1,1,1
+access_user_vit_maintenance,access_user_vit_maintenance,model_vit_maintenance,vit_hotel.group_hotel_management_user,1,0,0,0
+access_manager_vit_maintenance,access_manager_vit_maintenance,model_vit_maintenance,vit_hotel.group_hotel_management_manager,1,1,1,1
+access_admin_vit_maintenance,access_admin_vit_maintenance,model_vit_maintenance,base.group_system,1,1,1,1
