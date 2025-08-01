@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_tenant_tree" model="ir.ui.view">
+            <field name="name">vit_tenant_tree</field>
+            <field name="model">vit.tenant</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Tenant">
+                    <field name="name" /> <!-- 100-->
+                    <field name="floor_id" /> <!-- 100-->
+                    <field name="contact_person" /> <!-- 101-->
+                    <field name="contact_email" /> <!-- 102-->
+                    <field name="contact_phone" /> <!-- 103-->
+                    <field name="office_number" /> <!-- 104-->
+                    <field name="business_hours_start" /> <!-- 105-->
+                    <field name="business_hours_end" /> <!-- 106-->
+                    <field name="is_accessible" /> <!-- 107-->
+                    <field name="requires_approval" /> <!-- 108-->
+                    <field name="active" /> <!-- 109-->
+                </list>
+            </field>
+        </record>
+        <!-- pivot view -->
+        <record id="view_vit_tenant_pivot" model="ir.ui.view">
+            <field name="name">vit_tenant_tree</field>
+            <field name="model">vit.tenant</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Tenant">
+                    <field name="floor_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_tenant_form" model="ir.ui.view">
+            <field name="name">vit_tenant_form</field>
+            <field name="model">vit.tenant</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Tenant">
+                    <header>
+                        <button string="Reload" type="object" name="action_reload_view" icon="fa-refresh"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Tenant Name"/>
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group> <!-- left -->
+                                <field name="contact_person"  />
+                                <field name="contact_email"  />
+                                <field name="contact_phone"  />
+                                <field name="office_number"  />
+                                <field name="business_hours_start"  />
+                                <field name="business_hours_end"  />
+                                <field name="is_accessible"  />
+                                <field name="requires_approval"  />
+                                <field name="active"  />
+                            </group>
+                            <group> <!-- right -->
+                                <field name="floor_id"  />
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            </group>
+                            <div class="clearfix"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_tenant_search" model="ir.ui.view">
+            <field name="name">vit_tenant</field>
+            <field name="model">vit.tenant</field>
+            <field name="arch" type="xml">
+                <search string="Tenant">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Contact Person" name="filter_by_contact_person" domain="[('contact_person','=','')]" />
+                    <filter string="Contact Email" name="filter_by_contact_email" domain="[('contact_email','=','')]" />
+                    <filter string="Contact Phone" name="filter_by_contact_phone" domain="[('contact_phone','=','')]" />
+                    <filter string="Office Number" name="filter_by_office_number" domain="[('office_number','=','')]" />
+                    <filter string="Business Hours Start" name="filter_by_business_hours_start" domain="[('business_hours_start','=','')]" />
+                    <filter string="Business Hours End" name="filter_by_business_hours_end" domain="[('business_hours_end','=','')]" />
+                    <filter string="Is Accessible" name="filter_by_is_accessible" domain="[('is_accessible','=','')]" />
+                    <filter string="Requires Approval" name="filter_by_requires_approval" domain="[('requires_approval','=','')]" />
+                    <filter string="Active" name="filter_by_active" domain="[('active','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="contact_person" select="True"/>
+                    <field name="contact_email" select="True"/>
+                    <field name="contact_phone" select="True"/>
+                    <field name="office_number" select="True"/>
+                    <field name="business_hours_start" select="True"/>
+                    <field name="business_hours_end" select="True"/>
+                    <field name="is_accessible" select="True"/>
+                    <field name="requires_approval" select="True"/>
+                    <field name="active" select="True"/>
+                    <field name="floor_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Floor" domain="[]" name="group_by_floor_id" context="{'group_by':'floor_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image, image_512, image_1920, or image_small in the model -->
+        <record id="view_vit_tenant_kanban" model="ir.ui.view" >
+            <field name="name">vit_tenant</field>
+            <field name="model">vit.tenant</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- graph -->
+        <record id="view_vit_tenant_graph" model="ir.ui.view">
+            <field name="name">vit_tenant</field>
+            <field name="model">vit.tenant</field>
+            <field name="arch" type="xml">
+                <graph string="Tenant" type="bar">
+                    <field name="floor_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_tenant" model="ir.actions.act_window">
+            <field name="name">Tenant</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.tenant</field>
+            <field name="view_mode">list,form,kanban,pivot,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Tenant
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_tenant" name="Tenant" parent="vit_guest_config_menu" action="action_tenant" sequence="40"/>
+    </data>
+</odoo>

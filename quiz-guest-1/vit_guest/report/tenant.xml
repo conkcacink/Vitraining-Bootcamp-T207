@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- report qweb view -->
+        <record id="action_report_vit_tenant" model="ir.actions.report">
+            <field name="name">Tenant</field>
+            <field name="model">vit.tenant</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">vit_guest.vit_tenant_report</field>
+            <field name="report_file">vit_guest.vit_tenant_report</field>
+            <field name="print_report_name">object.name</field>
+            <field name="binding_model_id" ref="vit_guest.model_vit_tenant"/>
+            <field name="binding_type">report</field>
+        </record>
+        <!-- document template -->
+        <template id="vit_guest.vit_tenant_report_document" >
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang': lang})"/>
+                <div class="page">
+                    <h2>
+                        Tenant: <span t-field="doc.name"/>
+                    </h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Contact Person</strong>
+                            <p class="m-0" t-field="doc.contact_person" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Contact Email</strong>
+                            <p class="m-0" t-field="doc.contact_email" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Contact Phone</strong>
+                            <p class="m-0" t-field="doc.contact_phone" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Office Number</strong>
+                            <p class="m-0" t-field="doc.office_number" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Business Hours Start</strong>
+                            <p class="m-0" t-field="doc.business_hours_start" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Business Hours End</strong>
+                            <p class="m-0" t-field="doc.business_hours_end" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Is Accessible</strong>
+                            <p class="m-0" t-field="doc.is_accessible" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Requires Approval</strong>
+                            <p class="m-0" t-field="doc.requires_approval" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Active</strong>
+                            <p class="m-0" t-field="doc.active" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Floor</strong>
+                            <p class="m-0" t-field="doc.floor_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+
+        <!-- main template -->
+        <template id="vit_guest.vit_tenant_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="lang" t-value="doc.create_uid.lang"/>
+                    <t t-call="vit_guest.vit_tenant_report_document" />
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

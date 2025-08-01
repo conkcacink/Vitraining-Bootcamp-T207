@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_barcode_tree" model="ir.ui.view">
+            <field name="name">vit_barcode_tree</field>
+            <field name="model">vit.barcode</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Barcode">
+                    <field name="name" /> <!-- 100-->
+                    <field name="visit_id" /> <!-- 100-->
+                    <field name="barcode_value" /> <!-- 101-->
+                    <field name="generated_date" /> <!-- 102-->
+                    <field name="expiry_date" /> <!-- 103-->
+                    <field name="active" /> <!-- 104-->
+                    <field name="entry_scanned" /> <!-- 105-->
+                    <field name="exit_scanned" /> <!-- 106-->
+                    <field name="entry_scan_time" /> <!-- 107-->
+                    <field name="exit_scan_time" /> <!-- 108-->
+                    <field name="scanner_location" /> <!-- 109-->
+                </list>
+            </field>
+        </record>
+        <!-- pivot view -->
+        <record id="view_vit_barcode_pivot" model="ir.ui.view">
+            <field name="name">vit_barcode_tree</field>
+            <field name="model">vit.barcode</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Barcode">
+                    <field name="visit_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_barcode_form" model="ir.ui.view">
+            <field name="name">vit_barcode_form</field>
+            <field name="model">vit.barcode</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Barcode">
+                    <header>
+                        <button string="Reload" type="object" name="action_reload_view" icon="fa-refresh"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Barcode Name"/>
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group> <!-- left -->
+                                <field name="barcode_value"  />
+                                <field name="generated_date"  />
+                                <field name="expiry_date"  />
+                                <field name="active"  />
+                                <field name="entry_scanned"  />
+                                <field name="exit_scanned"  />
+                                <field name="entry_scan_time"  />
+                                <field name="exit_scan_time"  />
+                                <field name="scanner_location"  />
+                            </group>
+                            <group> <!-- right -->
+                                <field name="visit_id"  />
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            </group>
+                            <div class="clearfix"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_barcode_search" model="ir.ui.view">
+            <field name="name">vit_barcode</field>
+            <field name="model">vit.barcode</field>
+            <field name="arch" type="xml">
+                <search string="Barcode">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Barcode Value" name="filter_by_barcode_value" domain="[('barcode_value','=','')]" />
+                    <filter string="Generated Date" name="filter_by_generated_date" domain="[('generated_date','=','')]" />
+                    <filter string="Expiry Date" name="filter_by_expiry_date" domain="[('expiry_date','=','')]" />
+                    <filter string="Active" name="filter_by_active" domain="[('active','=','')]" />
+                    <filter string="Entry Scanned" name="filter_by_entry_scanned" domain="[('entry_scanned','=','')]" />
+                    <filter string="Exit Scanned" name="filter_by_exit_scanned" domain="[('exit_scanned','=','')]" />
+                    <filter string="Entry Scan Time" name="filter_by_entry_scan_time" domain="[('entry_scan_time','=','')]" />
+                    <filter string="Exit Scan Time" name="filter_by_exit_scan_time" domain="[('exit_scan_time','=','')]" />
+                    <filter string="Scanner Location" name="filter_by_scanner_location" domain="[('scanner_location','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="barcode_value" select="True"/>
+                    <field name="generated_date" select="True"/>
+                    <field name="expiry_date" select="True"/>
+                    <field name="active" select="True"/>
+                    <field name="entry_scanned" select="True"/>
+                    <field name="exit_scanned" select="True"/>
+                    <field name="entry_scan_time" select="True"/>
+                    <field name="exit_scan_time" select="True"/>
+                    <field name="scanner_location" select="True"/>
+                    <field name="visit_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Visit" domain="[]" name="group_by_visit_id" context="{'group_by':'visit_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image, image_512, image_1920, or image_small in the model -->
+        <record id="view_vit_barcode_kanban" model="ir.ui.view" >
+            <field name="name">vit_barcode</field>
+            <field name="model">vit.barcode</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            <span class="text-muted">Exit Scan Time</span> <field name="exit_scan_time"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <record id="view_vit_barcode_cal" model="ir.ui.view">
+            <field name="name">vit_barcode_cal</field>
+            <field name="model">vit.barcode</field>
+            <field name="arch" type="xml">
+                <calendar string="Barcode" date_start="exit_scan_time">
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+        <!-- graph -->
+        <record id="view_vit_barcode_graph" model="ir.ui.view">
+            <field name="name">vit_barcode</field>
+            <field name="model">vit.barcode</field>
+            <field name="arch" type="xml">
+                <graph string="Barcode" type="bar">
+                    <field name="visit_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_barcode" model="ir.actions.act_window">
+            <field name="name">Barcode</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.barcode</field>
+            <field name="view_mode">list,form,kanban,pivot,calendar,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Barcode
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_barcode" name="Barcode" parent="vit_guest_config_menu" action="action_barcode" sequence="60"/>
+    </data>
+</odoo>

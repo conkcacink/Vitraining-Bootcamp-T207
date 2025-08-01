@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_visit_tree" model="ir.ui.view">
+            <field name="name">vit_visit_tree</field>
+            <field name="model">vit.visit</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Visit">
+                    <field name="name" /> <!-- 100-->
+                    <field name="tenant_id" /> <!-- 100-->
+                    <field name="visit_date" /> <!-- 101-->
+                    <field name="floor_id" /> <!-- 101-->
+                    <field name="purpose" /> <!-- 102-->
+                    <field name="guest_id" /> <!-- 102-->
+                    <field name="expected_duration" /> <!-- 103-->
+                    <field name="entry_time" /> <!-- 104-->
+                    <field name="exit_time" /> <!-- 105-->
+                    <field name="status" /> <!-- 106-->
+                    <field name="barcode" /> <!-- 107-->
+                    <field name="barcode_used_entry" /> <!-- 108-->
+                    <field name="barcode_used_exit" /> <!-- 109-->
+                    <field name="host_notified" /> <!-- 110-->
+                    <field name="security_notes" /> <!-- 111-->
+                </list>
+            </field>
+        </record>
+        <!-- pivot view -->
+        <record id="view_vit_visit_pivot" model="ir.ui.view">
+            <field name="name">vit_visit_tree</field>
+            <field name="model">vit.visit</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Visit">
+                    <field name="tenant_id" type="row"/>
+                    <field name="floor_id" type="row"/>
+                    <field name="guest_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_visit_form" model="ir.ui.view">
+            <field name="name">vit_visit_form</field>
+            <field name="model">vit.visit</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Visit">
+                    <header>
+                        <button string="Reload" type="object" name="action_reload_view" icon="fa-refresh"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Visit Name"/>
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group> <!-- left -->
+                                <field name="visit_date"  />
+                                <field name="purpose"  />
+                                <field name="expected_duration"  />
+                                <field name="entry_time"  />
+                                <field name="exit_time"  />
+                                <field name="status"  />
+                                <field name="barcode"  />
+                                <field name="barcode_used_entry"  />
+                                <field name="barcode_used_exit"  />
+                                <field name="host_notified"  />
+                                <field name="security_notes"  />
+                            </group>
+                            <group> <!-- right -->
+                                <field name="tenant_id"  />
+                                <field name="floor_id"  />
+                                <field name="guest_id"  />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="barcode__ids" string="Barcode">
+                                <field name="barcode__ids" >
+                                    <list >
+                                        <field name="name" /> <!-- 100-->
+                                        <field name="barcode_value" /> <!-- 101-->
+                                        <field name="generated_date" /> <!-- 102-->
+                                        <field name="expiry_date" /> <!-- 103-->
+                                        <field name="active" /> <!-- 104-->
+                                        <field name="entry_scanned" /> <!-- 105-->
+                                        <field name="exit_scanned" /> <!-- 106-->
+                                        <field name="entry_scan_time" /> <!-- 107-->
+                                        <field name="exit_scan_time" /> <!-- 108-->
+                                        <field name="scanner_location" /> <!-- 109-->
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            </group>
+                            <div class="clearfix"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_visit_search" model="ir.ui.view">
+            <field name="name">vit_visit</field>
+            <field name="model">vit.visit</field>
+            <field name="arch" type="xml">
+                <search string="Visit">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Visit Date" name="filter_by_visit_date" domain="[('visit_date','=','')]" />
+                    <filter string="Purpose" name="filter_by_purpose" domain="[('purpose','=','')]" />
+                    <filter string="Expected Duration" name="filter_by_expected_duration" domain="[('expected_duration','=','')]" />
+                    <filter string="Entry Time" name="filter_by_entry_time" domain="[('entry_time','=','')]" />
+                    <filter string="Exit Time" name="filter_by_exit_time" domain="[('exit_time','=','')]" />
+                    <filter string="Status" name="filter_by_status" domain="[('status','=','')]" />
+                    <filter string="Barcode" name="filter_by_barcode" domain="[('barcode','=','')]" />
+                    <filter string="Barcode Used Entry" name="filter_by_barcode_used_entry" domain="[('barcode_used_entry','=','')]" />
+                    <filter string="Barcode Used Exit" name="filter_by_barcode_used_exit" domain="[('barcode_used_exit','=','')]" />
+                    <filter string="Host Notified" name="filter_by_host_notified" domain="[('host_notified','=','')]" />
+                    <filter string="Security Notes" name="filter_by_security_notes" domain="[('security_notes','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="visit_date" select="True"/>
+                    <field name="purpose" select="True"/>
+                    <field name="expected_duration" select="True"/>
+                    <field name="entry_time" select="True"/>
+                    <field name="exit_time" select="True"/>
+                    <field name="status" select="True"/>
+                    <field name="barcode" select="True"/>
+                    <field name="barcode_used_entry" select="True"/>
+                    <field name="barcode_used_exit" select="True"/>
+                    <field name="host_notified" select="True"/>
+                    <field name="security_notes" select="True"/>
+                    <field name="tenant_id" select="True"/>
+                    <field name="floor_id" select="True"/>
+                    <field name="guest_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Tenant" domain="[]" name="group_by_tenant_id" context="{'group_by':'tenant_id'}"/>
+                        <filter string="Floor" domain="[]" name="group_by_floor_id" context="{'group_by':'floor_id'}"/>
+                        <filter string="Guest" domain="[]" name="group_by_guest_id" context="{'group_by':'guest_id'}"/>
+                        <filter string="Status" domain="[]" name="group_by_status" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image, image_512, image_1920, or image_small in the model -->
+        <record id="view_vit_visit_kanban" model="ir.ui.view" >
+            <field name="name">vit_visit</field>
+            <field name="model">vit.visit</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            <span class="text-muted">Exit Time</span> <field name="exit_time"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <record id="view_vit_visit_cal" model="ir.ui.view">
+            <field name="name">vit_visit_cal</field>
+            <field name="model">vit.visit</field>
+            <field name="arch" type="xml">
+                <calendar string="Visit" date_start="exit_time">
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+        <!-- graph -->
+        <record id="view_vit_visit_graph" model="ir.ui.view">
+            <field name="name">vit_visit</field>
+            <field name="model">vit.visit</field>
+            <field name="arch" type="xml">
+                <graph string="Visit" type="bar">
+                    <field name="tenant_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_visit" model="ir.actions.act_window">
+            <field name="name">Visit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.visit</field>
+            <field name="view_mode">list,form,kanban,pivot,calendar,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Visit
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_visit" name="Visit" parent="vit_guest_config_menu" action="action_visit" sequence="50"/>
+    </data>
+</odoo>

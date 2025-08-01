@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+		<record model="ir.module.category" id="module_category_guest_management">
+			<field name="name">Guest Management</field>
+			<field name="description">Guest Management Groups</field>
+			<field name="sequence">10</field>
+		</record>
+		<record id="group_guest_management_user" model="res.groups">
+			<field name="name">User</field>
+			<field name="category_id" ref="module_category_guest_management"/>
+		</record>
+		<record id="group_guest_management_manager" model="res.groups">
+			<field name="name">Manager</field>
+			<field name="category_id" ref="module_category_guest_management"/>
+		</record>
+	</data>
+</odoo>

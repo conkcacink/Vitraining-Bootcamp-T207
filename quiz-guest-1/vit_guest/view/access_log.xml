@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_access_log_tree" model="ir.ui.view">
+            <field name="name">vit_access_log_tree</field>
+            <field name="model">vit.access_log</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Access Log">
+                    <field name="name" /> <!-- 100-->
+                    <field name="guest_id" /> <!-- 100-->
+                    <field name="action_type" /> <!-- 101-->
+                    <field name="visit_id" /> <!-- 101-->
+                    <field name="timestamp" /> <!-- 102-->
+                    <field name="barcode_scanned" /> <!-- 103-->
+                    <field name="scanner_location" /> <!-- 104-->
+                    <field name="success" /> <!-- 105-->
+                    <field name="failure_reason" /> <!-- 106-->
+                    <field name="security_officer" /> <!-- 107-->
+                </list>
+            </field>
+        </record>
+        <!-- pivot view -->
+        <record id="view_vit_access_log_pivot" model="ir.ui.view">
+            <field name="name">vit_access_log_tree</field>
+            <field name="model">vit.access_log</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Access Log">
+                    <field name="guest_id" type="row"/>
+                    <field name="visit_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_access_log_form" model="ir.ui.view">
+            <field name="name">vit_access_log_form</field>
+            <field name="model">vit.access_log</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Access Log">
+                    <header>
+                        <button string="Reload" type="object" name="action_reload_view" icon="fa-refresh"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Access Log Name"/>
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group> <!-- left -->
+                                <field name="action_type"  />
+                                <field name="timestamp"  />
+                                <field name="barcode_scanned"  />
+                                <field name="scanner_location"  />
+                                <field name="success"  />
+                                <field name="failure_reason"  />
+                                <field name="security_officer"  />
+                            </group>
+                            <group> <!-- right -->
+                                <field name="guest_id"  />
+                                <field name="visit_id"  />
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            </group>
+                            <div class="clearfix"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_access_log_search" model="ir.ui.view">
+            <field name="name">vit_access_log</field>
+            <field name="model">vit.access_log</field>
+            <field name="arch" type="xml">
+                <search string="Access Log">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Action Type" name="filter_by_action_type" domain="[('action_type','=','')]" />
+                    <filter string="Timestamp" name="filter_by_timestamp" domain="[('timestamp','=','')]" />
+                    <filter string="Barcode Scanned" name="filter_by_barcode_scanned" domain="[('barcode_scanned','=','')]" />
+                    <filter string="Scanner Location" name="filter_by_scanner_location" domain="[('scanner_location','=','')]" />
+                    <filter string="Success" name="filter_by_success" domain="[('success','=','')]" />
+                    <filter string="Failure Reason" name="filter_by_failure_reason" domain="[('failure_reason','=','')]" />
+                    <filter string="Security Officer" name="filter_by_security_officer" domain="[('security_officer','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="action_type" select="True"/>
+                    <field name="timestamp" select="True"/>
+                    <field name="barcode_scanned" select="True"/>
+                    <field name="scanner_location" select="True"/>
+                    <field name="success" select="True"/>
+                    <field name="failure_reason" select="True"/>
+                    <field name="security_officer" select="True"/>
+                    <field name="guest_id" select="True"/>
+                    <field name="visit_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Guest" domain="[]" name="group_by_guest_id" context="{'group_by':'guest_id'}"/>
+                        <filter string="Visit" domain="[]" name="group_by_visit_id" context="{'group_by':'visit_id'}"/>
+                        <filter string="Action Type" domain="[]" name="group_by_action_type" context="{'group_by':'action_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image, image_512, image_1920, or image_small in the model -->
+        <record id="view_vit_access_log_kanban" model="ir.ui.view" >
+            <field name="name">vit_access_log</field>
+            <field name="model">vit.access_log</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            <span class="text-muted">Timestamp</span> <field name="timestamp"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <record id="view_vit_access_log_cal" model="ir.ui.view">
+            <field name="name">vit_access_log_cal</field>
+            <field name="model">vit.access_log</field>
+            <field name="arch" type="xml">
+                <calendar string="Access Log" date_start="timestamp">
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+        <!-- graph -->
+        <record id="view_vit_access_log_graph" model="ir.ui.view">
+            <field name="name">vit_access_log</field>
+            <field name="model">vit.access_log</field>
+            <field name="arch" type="xml">
+                <graph string="Access Log" type="bar">
+                    <field name="guest_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_access_log" model="ir.actions.act_window">
+            <field name="name">Access Log</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.access_log</field>
+            <field name="view_mode">list,form,kanban,pivot,calendar,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Access Log
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_access_log" name="Access Log" parent="vit_guest_config_menu" action="action_access_log" sequence="70"/>
+    </data>
+</odoo>

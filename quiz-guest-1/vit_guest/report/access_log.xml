@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- report qweb view -->
+        <record id="action_report_vit_access_log" model="ir.actions.report">
+            <field name="name">Access Log</field>
+            <field name="model">vit.access_log</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">vit_guest.vit_access_log_report</field>
+            <field name="report_file">vit_guest.vit_access_log_report</field>
+            <field name="print_report_name">object.name</field>
+            <field name="binding_model_id" ref="vit_guest.model_vit_access_log"/>
+            <field name="binding_type">report</field>
+        </record>
+        <!-- document template -->
+        <template id="vit_guest.vit_access_log_report_document" >
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang': lang})"/>
+                <div class="page">
+                    <h2>
+                        Access Log: <span t-field="doc.name"/>
+                    </h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Action Type</strong>
+                            <p class="m-0" t-field="doc.action_type" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Timestamp</strong>
+                            <p class="m-0" t-field="doc.timestamp" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Barcode Scanned</strong>
+                            <p class="m-0" t-field="doc.barcode_scanned" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Scanner Location</strong>
+                            <p class="m-0" t-field="doc.scanner_location" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Success</strong>
+                            <p class="m-0" t-field="doc.success" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Failure Reason</strong>
+                            <p class="m-0" t-field="doc.failure_reason" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Security Officer</strong>
+                            <p class="m-0" t-field="doc.security_officer" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Guest</strong>
+                            <p class="m-0" t-field="doc.guest_id"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Visit</strong>
+                            <p class="m-0" t-field="doc.visit_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+
+        <!-- main template -->
+        <template id="vit_guest.vit_access_log_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="lang" t-value="doc.create_uid.lang"/>
+                    <t t-call="vit_guest.vit_access_log_report_document" />
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

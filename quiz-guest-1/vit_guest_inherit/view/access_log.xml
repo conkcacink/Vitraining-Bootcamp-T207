@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <!--record id="view_access_log_tree" model="ir.ui.view">
+            <field name="name">access_log_tree</field>
+            <field name="model">vit.access_log</field>
+            <field name="inherit_id" ref="vit_guest.view_vit_access_log_tree"/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- form view -->
+        <!-- record id="view_access_log_form" model="ir.ui.view">
+            <field name="name">access_log_form</field>
+            <field name="model">vit.access_log</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="vit_guest.view_vit_access_log_form"/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- search -->
+        <!--record id="view_access_log_search" model="ir.ui.view">
+            <field name="name">access_log</field>
+            <field name="model">vit.access_log</field>
+            <field name="inherit_id" ref="vit_guest.view_vit_access_log_search"/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- action window -->
+        <record id="vit_guest.action_access_log" model="ir.actions.act_window">
+            <field name="name">Access Log</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.access_log</field>
+            <field name="view_mode">list,form,kanban,pivot,calendar,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Access Log
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem active="1" id="vit_guest.menu_access_log" name="Access Log" parent="vit_guest.vit_guest_config_menu" action="vit_guest.action_access_log" sequence="70"/>
+    </data>
+</odoo>

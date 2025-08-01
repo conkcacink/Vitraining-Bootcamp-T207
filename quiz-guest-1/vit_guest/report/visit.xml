@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- report qweb view -->
+        <record id="action_report_vit_visit" model="ir.actions.report">
+            <field name="name">Visit</field>
+            <field name="model">vit.visit</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">vit_guest.vit_visit_report</field>
+            <field name="report_file">vit_guest.vit_visit_report</field>
+            <field name="print_report_name">object.name</field>
+            <field name="binding_model_id" ref="vit_guest.model_vit_visit"/>
+            <field name="binding_type">report</field>
+        </record>
+        <!-- document template -->
+        <template id="vit_guest.vit_visit_report_document" >
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang': lang})"/>
+                <div class="page">
+                    <h2>
+                        Visit: <span t-field="doc.name"/>
+                    </h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Visit Date</strong>
+                            <p class="m-0" t-field="doc.visit_date" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Purpose</strong>
+                            <p class="m-0" t-field="doc.purpose" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Expected Duration</strong>
+                            <p class="m-0" t-field="doc.expected_duration" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Entry Time</strong>
+                            <p class="m-0" t-field="doc.entry_time" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Exit Time</strong>
+                            <p class="m-0" t-field="doc.exit_time" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Status</strong>
+                            <p class="m-0" t-field="doc.status" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Barcode</strong>
+                            <p class="m-0" t-field="doc.barcode" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Barcode Used Entry</strong>
+                            <p class="m-0" t-field="doc.barcode_used_entry" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Barcode Used Exit</strong>
+                            <p class="m-0" t-field="doc.barcode_used_exit" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Host Notified</strong>
+                            <p class="m-0" t-field="doc.host_notified" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Security Notes</strong>
+                            <p class="m-0" t-field="doc.security_notes" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Tenant</strong>
+                            <p class="m-0" t-field="doc.tenant_id"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Floor</strong>
+                            <p class="m-0" t-field="doc.floor_id"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Guest</strong>
+                            <p class="m-0" t-field="doc.guest_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+                <h2>Barcode</h2>
+                <table class="table table-sm o_main_table" name="barcode__ids_table">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Barcode Value</td>
+                            <td>Generated Date</td>
+                            <td>Expiry Date</td>
+                            <td>Active</td>
+                            <td>Entry Scanned</td>
+                            <td>Exit Scanned</td>
+                            <td>Entry Scan Time</td>
+                            <td>Exit Scan Time</td>
+                            <td>Scanner Location</td>
+                            <td>Visit</td>
+                        </tr>
+                    </thead>
+                    <tbody class="barcode__ids_tbody">
+                        <tr t-foreach="doc.barcode__ids" t-as="line">
+                            <td><span t-field="line.name" /></td>
+                            <td><span t-field="line.barcode_value" /></td>
+                            <td><span t-field="line.generated_date" /></td>
+                            <td><span t-field="line.expiry_date" /></td>
+                            <td><span t-field="line.active" /></td>
+                            <td><span t-field="line.entry_scanned" /></td>
+                            <td><span t-field="line.exit_scanned" /></td>
+                            <td><span t-field="line.entry_scan_time" /></td>
+                            <td><span t-field="line.exit_scan_time" /></td>
+                            <td><span t-field="line.scanner_location" /></td>
+                            <td><span t-field="line.visit_id" /></td>
+                        </tr> <!-- foreach-->
+                    </tbody>
+                </table>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+
+        <!-- main template -->
+        <template id="vit_guest.vit_visit_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="lang" t-value="doc.create_uid.lang"/>
+                    <t t-call="vit_guest.vit_visit_report_document" />
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

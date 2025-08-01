@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <!--record id="view_visit_tree" model="ir.ui.view">
+            <field name="name">visit_tree</field>
+            <field name="model">vit.visit</field>
+            <field name="inherit_id" ref="vit_guest.view_vit_visit_tree"/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- form view -->
+        <!-- record id="view_visit_form" model="ir.ui.view">
+            <field name="name">visit_form</field>
+            <field name="model">vit.visit</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="vit_guest.view_vit_visit_form"/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- search -->
+        <!--record id="view_visit_search" model="ir.ui.view">
+            <field name="name">visit</field>
+            <field name="model">vit.visit</field>
+            <field name="inherit_id" ref="vit_guest.view_vit_visit_search"/>
+            <field name="arch" type="xml">
+            </field>
+        </record-->
+        <!-- action window -->
+        <record id="vit_guest.action_visit" model="ir.actions.act_window">
+            <field name="name">Visit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.visit</field>
+            <field name="view_mode">list,form,kanban,pivot,calendar,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Visit
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem active="1" id="vit_guest.menu_visit" name="Visit" parent="vit_guest.vit_guest_config_menu" action="vit_guest.action_visit" sequence="50"/>
+    </data>
+</odoo>

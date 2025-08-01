@@ -1,0 +1,7 @@
+<odoo>
+	<data>
+		<menuitem id="vit_guest_top_menu" name="Guest Management" sequence="20" web_icon="vit_guest,static/description/icon.png" />
+		<menuitem id="vit_guest_sub_menu" name="Operations" sequence="40" parent="vit_guest_top_menu" />
+		<menuitem id="vit_guest_config_menu" name="Configurations" sequence="1000" parent="vit_guest_top_menu" />
+	</data>
+</odoo>

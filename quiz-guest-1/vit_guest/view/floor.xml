@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_floor_tree" model="ir.ui.view">
+            <field name="name">vit_floor_tree</field>
+            <field name="model">vit.floor</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Floor">
+                    <field name="name" /> <!-- 100-->
+                    <field name="floor_number" /> <!-- 101-->
+                    <field name="description" /> <!-- 102-->
+                    <field name="is_accessible" /> <!-- 103-->
+                    <field name="security_level" /> <!-- 104-->
+                    <field name="active" /> <!-- 105-->
+                </list>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_floor_form" model="ir.ui.view">
+            <field name="name">vit_floor_form</field>
+            <field name="model">vit.floor</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Floor">
+                    <header>
+                        <button string="Reload" type="object" name="action_reload_view" icon="fa-refresh"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Floor Name"/>
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group> <!-- left -->
+                                <field name="floor_number"  />
+                                <field name="description"  />
+                                <field name="is_accessible"  />
+                                <field name="security_level"  />
+                                <field name="active"  />
+                            </group>
+                            <group> <!-- right -->
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="tenant_ids" string="Tenant">
+                                <field name="tenant_ids" >
+                                    <list >
+                                        <field name="name" /> <!-- 100-->
+                                        <field name="contact_person" /> <!-- 101-->
+                                        <field name="contact_email" /> <!-- 102-->
+                                        <field name="contact_phone" /> <!-- 103-->
+                                        <field name="office_number" /> <!-- 104-->
+                                        <field name="business_hours_start" /> <!-- 105-->
+                                        <field name="business_hours_end" /> <!-- 106-->
+                                        <field name="is_accessible" /> <!-- 107-->
+                                        <field name="requires_approval" /> <!-- 108-->
+                                        <field name="active" /> <!-- 109-->
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            </group>
+                            <div class="clearfix"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_floor_search" model="ir.ui.view">
+            <field name="name">vit_floor</field>
+            <field name="model">vit.floor</field>
+            <field name="arch" type="xml">
+                <search string="Floor">
+
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <filter string="Floor Number" name="filter_by_floor_number" domain="[('floor_number','=','')]" />
+                    <filter string="Description" name="filter_by_description" domain="[('description','=','')]" />
+                    <filter string="Is Accessible" name="filter_by_is_accessible" domain="[('is_accessible','=','')]" />
+                    <filter string="Security Level" name="filter_by_security_level" domain="[('security_level','=','')]" />
+                    <filter string="Active" name="filter_by_active" domain="[('active','=','')]" />
+                    <field name="name" select="True"/>
+                    <field name="floor_number" select="True"/>
+                    <field name="description" select="True"/>
+                    <field name="is_accessible" select="True"/>
+                    <field name="security_level" select="True"/>
+                    <field name="active" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Security Level" domain="[]" name="group_by_security_level" context="{'group_by':'security_level'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image, image_512, image_1920, or image_small in the model -->
+        <record id="view_vit_floor_kanban" model="ir.ui.view" >
+            <field name="name">vit_floor</field>
+            <field name="model">vit.floor</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_floor" model="ir.actions.act_window">
+            <field name="name">Floor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.floor</field>
+            <field name="view_mode">list,form,kanban,pivot</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Floor
+                </p><p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_floor" name="Floor" parent="vit_guest_config_menu" action="action_floor" sequence="30"/>
+    </data>
+</odoo>
